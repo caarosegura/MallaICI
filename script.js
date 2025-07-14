@@ -1,62 +1,131 @@
-// Mapeo de los ramos y su estado
 const ramos = [
-  { id: 1, requisito: 'none', area: 'mathematics', aprobado: false },
-  { id: 2, requisito: 'none', area: 'mathematics', aprobado: false },
-  { id: 3, requisito: 'none', area: 'fisica', aprobado: false },
-  { id: 4, requisito: 'none', area: 'industrial', aprobado: false },
-  { id: 5, requisito: 'none', area: 'institucional', aprobado: false },
-  { id: 6, requisito: 1, area: 'mathematics', aprobado: false },
-  { id: 7, requisito: 2, area: 'mathematics', aprobado: false },
-  { id: 8, requisito: 'none', area: 'fisica', aprobado: false },
-  { id: 9, requisito: 4, area: 'industrial', aprobado: false },
-  { id: 10, requisito: 'none', area: 'institucional', aprobado: false },
-  { id: 11, requisito: 'none', area: 'institucional', aprobado: false },
+  {
+    id: "alg-trig",
+    nombre: "Álgebra y Trigonometría",
+    creditos: 6,
+    desbloquea: ["alg-lineal"],
+  },
+  {
+    id: "calc-dif",
+    nombre: "Cálculo Diferencial",
+    creditos: 6,
+    desbloquea: ["calc-int", "electromagnetismo"],
+  },
+  {
+    id: "quimica",
+    nombre: "Química General",
+    creditos: 8,
+    desbloquea: [],
+    color: "verde",
+  },
+  {
+    id: "intro-ing",
+    nombre: "Introducción a la Ing. Industrial",
+    creditos: 6,
+    desbloquea: ["software"],
+  },
+  {
+    id: "form-int-1",
+    nombre: "Formación Integral I",
+    creditos: 2,
+    desbloquea: [],
+  },
+  {
+    id: "form-int-2",
+    nombre: "Formación Integral II",
+    creditos: 2,
+    desbloquea: [],
+  },
+  {
+    id: "alg-lineal",
+    nombre: "Álgebra Lineal",
+    creditos: 6,
+    prereq: ["alg-trig"],
+    desbloquea: ["ec-dif"],
+  },
+  {
+    id: "calc-int",
+    nombre: "Cálculo Integral",
+    creditos: 6,
+    prereq: ["calc-dif"],
+    desbloquea: ["calc-multiv", "estadistica", "ec-dif"],
+  },
+  {
+    id: "fis-mec",
+    nombre: "Física Mecánica",
+    creditos: 8,
+    desbloquea: [],
+  },
+  {
+    id: "software",
+    nombre: "Software para la Ing. Industrial",
+    creditos: 4,
+    prereq: ["intro-ing"],
+    desbloquea: ["algoritmos"],
+  },
+  {
+    id: "emprendimiento",
+    nombre: "Taller de Emprendimiento",
+    creditos: 4,
+    desbloquea: ["taller-basicas", "teoria-sistemas"],
+  },
+  {
+    id: "algoritmos",
+    nombre: "Algoritmos y Programación",
+    creditos: 4,
+    prereq: ["software"],
+    desbloquea: [],
+  },
+  {
+    id: "electromagnetismo",
+    nombre: "Electromagnetismo",
+    creditos: 8,
+    prereq: ["calc-dif"],
+    desbloquea: ["electrotecnia"],
+  },
+  {
+    id: "estadistica",
+    nombre: "Estadística",
+    creditos: 6,
+    prereq: ["calc-int"],
+    desbloquea: ["metodos-prod", "inferencia"],
+  },
+  {
+    id: "calc-multiv",
+    nombre: "Cálculo Multivariable",
+    creditos: 6,
+    prereq: ["calc-int"],
+    desbloquea: [],
+  },
+  {
+    id: "ec-dif",
+    nombre: "Ecuaciones Diferenciales",
+    creditos: 6,
+    prereq: ["alg-lineal", "calc-int"],
+    desbloquea: [],
+  },
+  {
+    id: "teoria-sistemas",
+    nombre: "Teoría de Sistemas",
+    creditos: 3,
+    prereq: ["emprendimiento"],
+    desbloquea: ["gestion-estrategica", "modelamiento"],
+  },
+  {
+    id: "taller-basicas",
+    nombre: "Taller de Ciencias Básicas",
+    creditos: 3,
+    prereq_creditos: 70,
+    prereq: ["emprendimiento"],
+    desbloquea: ["taller-ingenieria"],
+  },
+  {
+    id: "taller-ingenieria",
+    nombre: "Taller de Ciencias de la Ingeniería",
+    creditos: 4,
+    prereq_creditos: 100,
+    prereq: ["taller-basicas"],
+    desbloquea: ["taller-productivos"],
+  },
+  // Agrega más ramos aquí siguiendo la estructura
 ];
-
-// Función para actualizar los ramos visualmente
-function actualizarRamos() {
-  const ramoElements = document.querySelectorAll('.ramo');
-  ramoElements.forEach(element => {
-    const ramoId = parseInt(element.getAttribute('data-id'));
-    const ramo = ramos.find(r => r.id === ramoId);
-
-    // Actualiza el color de área
-    element.classList.remove('mathematics', 'fisica', 'quimica', 'industrial', 'institucional');
-    element.classList.add(ramo.area);
-
-    // Cambia el estado (bloqueado/desbloqueado)
-    if (ramo.aprobado) {
-      element.classList.remove('bloqueado');
-      element.classList.add('desbloqueado');
-      element.style.opacity = 1; // Totalmente visible
-    } else {
-      element.classList.add('bloqueado');
-      element.style.opacity = 0.3; // Un poco transparente
-    }
-  });
-}
-
-// Función para aprobar un ramo
-function aprobarRamo(id) {
-  const ramo = ramos.find(r => r.id === id);
-  if (ramo && (ramo.requisito === 'none' || ramos[ramo.requisito - 1].aprobado)) {
-    ramo.aprobado = true; // Marca como aprobado
-    actualizarRamos();
-  }
-}
-
-// Asocia los botones con la función de aprobar
-document.getElementById('aprobarRamo1').addEventListener('click', () => aprobarRamo(1));
-document.getElementById('aprobarRamo2').addEventListener('click', () => aprobarRamo(2));
-document.getElementById('aprobarRamo3').addEventListener('click', () => aprobarRamo(3));
-document.getElementById('aprobarRamo4').addEventListener('click', () => aprobarRamo(4));
-document.getElementById('aprobarRamo5').addEventListener('click', () => aprobarRamo(5));
-document.getElementById('aprobarRamo6').addEventListener('click', () => aprobarRamo(6));
-document.getElementById('aprobarRamo7').addEventListener('click', () => aprobarRamo(7));
-document.getElementById('aprobarRamo8').addEventListener('click', () => aprobarRamo(8));
-document.getElementById('aprobarRamo9').addEventListener('click', () => aprobarRamo(9));
-document.getElementById('aprobarRamo10').addEventListener('click', () => aprobarRamo(10));
-document.getElementById('aprobarRamo11').addEventListener('click', () => aprobarRamo(11));
-
-// Inicializa la malla
-actualizarRamos();
