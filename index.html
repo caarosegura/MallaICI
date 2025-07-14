@@ -1,80 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Malla Interactiva - Ingeniería Industrial</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Malla Curricular - Ingeniería Civil Industrial</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Malla Interactiva de Ingeniería Industrial</h1>
+  <header>
+    <h1>Malla Curricular</h1>
+    <div id="creditos">Créditos SCT aprobados: 0</div>
+  </header>
+  <main id="malla"></main>
 
-  <!-- Primer Año, Primer Semestre -->
-  <div class="semestre">
-    <h2>Primer Año - Primer Semestre</h2>
-    <div class="ramo" id="ramo1" data-id="1" data-requisito="none" data-area="matematicas">
-      <h3>Álgebra y Trigonometría (6 créditos)</h3>
-      <p>Abre: Álgebra Lineal</p>
-    </div>
-    <div class="ramo" id="ramo2" data-id="2" data-requisito="none" data-area="matematicas">
-      <h3>Cálculo Diferencial (6 créditos)</h3>
-      <p>Abre: Cálculo Integral, Electromagnetismo</p>
-    </div>
-    <div class="ramo" id="ramo3" data-id="3" data-requisito="none" data-area="quimica">
-      <h3>Química General (8 créditos)</h3>
-    </div>
-    <div class="ramo" id="ramo4" data-id="4" data-requisito="none" data-area="industrial">
-      <h3>Introducción a la Ingeniería Industrial (6 créditos)</h3>
-      <p>Abre: Software para la Ingeniería Industrial</p>
-    </div>
-    <div class="ramo" id="ramo5" data-id="5" data-requisito="none" data-area="institucional">
-      <h3>Formación Integral Institucional (2 créditos)</h3>
-    </div>
-  </div>
-
-  <!-- Primer Año, Segundo Semestre -->
-  <div class="semestre">
-    <h2>Primer Año - Segundo Semestre</h2>
-    <div class="ramo" id="ramo6" data-id="6" data-requisito="1" data-area="matematicas">
-      <h3>Álgebra Lineal (6 créditos)</h3>
-      <p>Abre: Ecuaciones Diferenciales</p>
-    </div>
-    <div class="ramo" id="ramo7" data-id="7" data-requisito="2" data-area="matematicas">
-      <h3>Cálculo Integral (6 créditos)</h3>
-      <p>Abre: Cálculo Multivariable, Estadística, Ecuaciones Diferenciales</p>
-    </div>
-    <div class="ramo" id="ramo8" data-id="8" data-requisito="none" data-area="fisica">
-      <h3>Física Mecánica (8 créditos)</h3>
-    </div>
-    <div class="ramo" id="ramo9" data-id="9" data-requisito="4" data-area="industrial">
-      <h3>Software para la Ingeniería Industrial (4 créditos)</h3>
-      <p>Abre: Algoritmos y Programación para Ingeniería Industrial</p>
-    </div>
-    <div class="ramo" id="ramo10" data-id="10" data-requisito="none" data-area="institucional">
-      <h3>Formación Integral Institucional (2 créditos)</h3>
-    </div>
-    <div class="ramo" id="ramo11" data-id="11" data-requisito="none" data-area="institucional">
-      <h3>Taller de Emprendimiento (4 créditos)</h3>
-      <p>Abre: Taller de Ciencias Básicas y Teoría de Sistemas</p>
-    </div>
-  </div>
-
-  <!-- Botones de acción para aprobar ramos -->
-  <div class="acciones">
-    <h2>Acciones</h2>
-    <button id="aprobarRamo1">Aprobar Ramo 1</button>
-    <button id="aprobarRamo2">Aprobar Ramo 2</button>
-    <button id="aprobarRamo3">Aprobar Ramo 3</button>
-    <button id="aprobarRamo4">Aprobar Ramo 4</button>
-    <button id="aprobarRamo5">Aprobar Ramo 5</button>
-    <button id="aprobarRamo6">Aprobar Ramo 6</button>
-    <button id="aprobarRamo7">Aprobar Ramo 7</button>
-    <button id="aprobarRamo8">Aprobar Ramo 8</button>
-    <button id="aprobarRamo9">Aprobar Ramo 9</button>
-    <button id="aprobarRamo10">Aprobar Ramo 10</button>
-    <button id="aprobarRamo11">Aprobar Ramo 11</button>
-  </div>
-
+  <script src="data.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
