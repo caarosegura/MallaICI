@@ -1,84 +1,51 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  font-family: sans-serif;
+  background: #f4f4f4;
   margin: 0;
+  padding: 0;
 }
 
-h1, h2 {
-  color: #333;
-}
-
-.semestre {
+header {
+  background-color: #003366;
+  color: white;
+  padding: 1rem;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#creditos {
+  font-weight: bold;
+}
+
+main#malla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 10px;
-  margin-bottom: 20px;
+  padding: 20px;
 }
 
 .ramo {
-  width: 300px;
-  height: 120px;
-  background-color: #cccccc;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
+  background-color: #ccc; /* bloqueado */
+  padding: 1rem;
   border-radius: 8px;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 0.3s, transform 0.3s;
   text-align: center;
-}
-
-.ramo.bloqueado {
-  background-color: #dddddd;
+  cursor: not-allowed;
+  transition: background-color 0.3s ease;
 }
 
 .ramo.desbloqueado {
-  background-color: #FFFFFF;
-  opacity: 1;
-}
-
-.ramo.mathematics {
-  background-color: #4CAF50; /* Color para Matemáticas */
-}
-
-.ramo.fisica {
-  background-color: #2196F3; /* Color para Física */
-}
-
-.ramo.quimica {
-  background-color: #FF9800; /* Color para Química */
-}
-
-.ramo.industrial {
-  background-color: #FFC107; /* Color para Industrial */
-}
-
-.ramo.institucional {
-  background-color: #9E9E9E; /* Color para Institucional */
-}
-
-.ramo:hover {
-  transform: scale(1.05);
-}
-
-button {
-  padding: 10px 20px;
-  margin: 5px;
-  background-color: #4CAF50;
+  background-color: #2196f3;
   color: white;
-  border: none;
   cursor: pointer;
-  border-radius: 5px;
 }
 
-button:hover {
-  background-color: #45a049;
+.ramo.aprobado {
+  background-color: #4caf50;
+  color: white;
+  cursor: default;
+}
+
+.ramo.verde {
+  border: 2px solid green;
 }
