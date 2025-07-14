@@ -1,0 +1,26 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.malla {
+  display: grid;
+  grid-template-columns: repeat(5, 100px); /* 5 columnas */
+  gap: 10px;
+}
+
+.cuadro {
+  width: 100px;
+  height: 100px;
+  background-color: #4CAF50;
+  transition: background-color 0.3s ease;
+}
+
+.cuadro:hover {
+  background-color: #45a049;
+}
