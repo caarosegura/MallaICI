@@ -2,9 +2,49 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Malla Curricular - Ingeniería Civil Industrial</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Malla Curricular</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #creditos {
+      font-weight: bold;
+    }
+    main#malla {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+      padding: 20px;
+    }
+    .ramo {
+      background-color: #ccc;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      cursor: not-allowed;
+    }
+    .ramo.desbloqueado {
+      background-color: #2196f3;
+      color: white;
+      cursor: pointer;
+    }
+    .ramo.aprobado {
+      background-color: #4caf50;
+      color: white;
+      cursor: default;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -13,7 +53,75 @@
   </header>
   <main id="malla"></main>
 
-  <script src="data.js"></script>
-  <script src="script.js"></script>
+  <script>
+    const ramos = [
+      {
+        id: "alg-trig",
+        nombre: "Álgebra y Trigonometría",
+        creditos: 6,
+        desbloquea: ["alg-lineal"],
+      },
+      {
+        id: "alg-lineal",
+        nombre: "Álgebra Lineal",
+        creditos: 6,
+        prereq: ["alg-trig"],
+        desbloquea: [],
+      }
+    ];
+
+    const contenedor = document.getElementById("malla");
+    const contador = document.getElementById("creditos");
+
+    let creditosAprobados = 0;
+    const estadoRamos = {};
+
+    function renderMalla() {
+      ramos.forEach(ramo => {
+        const div = document.createElement("div");
+        div.classList.add("ramo");
+        div.id = ramo.id;
+        div.innerText = ramo.nombre;
+        estadoRamos[ramo.id] = { aprobado: false, elemento: div };
+        contenedor.appendChild(div);
+      });
+      actualizarDisponibilidad();
+    }
+
+    function actualizarDisponibilidad() {
+      ramos.forEach(ramo => {
+        const { id, prereq = [], prereq_creditos = 0 } = ramo;
+        const aprobado = estadoRamos[id].aprobado;
+        if (aprobado) return;
+
+        const prereqCumplido = prereq.every(pr => estadoRamos[pr]?.aprobado);
+        const creditosCumplidos = creditosAprobados >= prereq_creditos;
+
+        if (prereqCumplido && creditosCumplidos) {
+          estadoRamos[id].elemento.classList.add("desbloqueado");
+          estadoRamos[id].elemento.onclick = () => aprobarRamo(id);
+        }
+      });
+    }
+
+    function aprobarRamo(id) {
+      const ramo = ramos.find(r => r.id === id);
+      const estado = estadoRamos[id];
+
+      if (estado.aprobado) return;
+
+      estado.aprobado = true;
+      estado.elemento.classList.remove("desbloqueado");
+      estado.elemento.classList.add("aprobado");
+      estado.elemento.onclick = null;
+
+      creditosAprobados += ramo.creditos;
+      contador.innerText = `Créditos SCT aprobados: ${creditosAprobados}`;
+
+      actualizarDisponibilidad();
+    }
+
+    renderMalla();
+  </script>
 </body>
 </html>
